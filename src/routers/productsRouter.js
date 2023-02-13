@@ -3,13 +3,8 @@ const { productsControllers } = require('../controllers/index');
 
 const router = express.Router();
 
-router.get('/', productsControllers.getAllProducts);
+router.get('/', productsControllers.getAllProds);
 
-// router.post('/:id', async (req, res) => {
-//   const id = Number(req.params.id);
-//   const product = await findProductById(id);
-//   console.log(product);
-//   res.status(200).json(product);
-// });
+router.get('/:id', productsControllers.getProductById);
 
 module.exports = router;
