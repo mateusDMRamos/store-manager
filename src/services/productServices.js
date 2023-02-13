@@ -1,5 +1,5 @@
 const { productsModel } = require('../models');
-const { validateId } = require('./validation/validationInputValues');
+const { validateId, validateName } = require('./validation/validationInputValues');
 
 const getAllProducts = async () => {
   const products = await productsModel.findAllProducts();
@@ -14,7 +14,16 @@ const findById = async (productId) => {
   return { type: 404, message: 'Product not found' };
 };
 
+const setNewProduct = async (productName) => {
+  const error = validateName(productName);
+  if (error.type) return error;
+  const product = await productsModel.writeNewProduct(productName);
+  if (product) return { type: null, message: product };
+  return { type: 404, message: 'Product not found' };
+};
+
 module.exports = {
   getAllProducts,
   findById,
+  setNewProduct,
 };
