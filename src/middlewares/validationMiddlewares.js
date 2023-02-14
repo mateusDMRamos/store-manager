@@ -48,9 +48,19 @@ const validateSales = (req, res, next) => {
   next();
 };
 
+const deleteProductIdCheck = async (req, res, next) => {
+  const { id } = req.params;
+  const productData = await productsModel.findProductById(id);
+  if (!productData) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  next();
+};
+
 module.exports = {
   validateName,
   validateSales,
   productIdCheck,
   singleProductCheck,
+  deleteProductIdCheck,
 };

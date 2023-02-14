@@ -29,9 +29,15 @@ const setProductUpdate = async (productId, productName) => {
   return { type: 500, message: 'Internal error' };
 };
 
+const deleteInformedProduct = async (productId) => {
+  await productsModel.deletProduct(productId);
+  return { type: 204 };
+};
+
 module.exports = {
   getAllProducts,
   findById,
   setNewProduct,
   setProductUpdate,
+  deleteInformedProduct,
 };

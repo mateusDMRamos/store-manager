@@ -1,6 +1,9 @@
 const express = require('express');
 const { productsControllers } = require('../controllers/index');
-const { singleProductCheck } = require('../middlewares/validationMiddlewares');
+const {
+  singleProductCheck,
+  deleteProductIdCheck,
+} = require('../middlewares/validationMiddlewares');
 
 const router = express.Router();
 
@@ -11,5 +14,7 @@ router.get('/:id', productsControllers.getProductById);
 router.post('/', productsControllers.newProduct);
 
 router.put('/:id', singleProductCheck, productsControllers.updateProduct);
+
+router.delete('/:id', deleteProductIdCheck, productsControllers.deleteProduct);
 
 module.exports = router;
