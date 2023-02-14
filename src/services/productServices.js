@@ -23,8 +23,15 @@ const setNewProduct = async (productName) => {
   return { type: 404, message: 'Product not found' };
 };
 
+const setProductUpdate = async (productId, productName) => {
+  const product = await productsModel.updateProduct(productId, productName);
+  if (product) return { type: 200, message: product };
+  return { type: 500, message: 'Internal error' };
+};
+
 module.exports = {
   getAllProducts,
   findById,
   setNewProduct,
+  setProductUpdate,
 };
