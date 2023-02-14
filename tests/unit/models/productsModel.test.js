@@ -18,6 +18,12 @@ describe('Testes de unidade da camada model para o model de produtos', function 
     expect(result).to.be.deep.equal(allProducts[0]);
   });
 
+  it('Verifica se a função de adicionar os produtos por nome está funcionando', async function () {
+    sinon.stub(connection, 'execute').resolves([allProducts]);
+    const result = await productsModel.writeNewProduct(1);
+    expect(result).to.be.deep.equal(allProducts[0]);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

@@ -3,7 +3,12 @@ const sinon = require('sinon');
 const { productServices } = require('../../../src/services/index');
 const { productsModel } = require('../../../src/models/index');
 
-const { allProducts, idError, singleProduct } = require('./mocks/productsMocks');
+const {
+  allProducts,
+  idError,
+  singleProduct,
+  newProduct,
+} = require('./mocks/productsMocks');
 
 
 describe('Testes de unidade da camada services para o service de produtos', function () {
@@ -23,6 +28,13 @@ describe('Testes de unidade da camada services para o service de produtos', func
     sinon.stub(productsModel, 'findProductById').resolves(idError);
     const result = await productServices.findById(17);
     expect(result.message).to.be.deep.equal(idError);
+  });
+
+
+  it('Verifica se a função de adicionar os produtos por nome está retornando o produto corretamente quando é informado um nome válido', async function () {
+    sinon.stub(productsModel, 'writeNewProduct').resolves(newProduct);
+    const result = await productServices.setNewProduct('produtoX');
+    expect(result.message).to.be.deep.equal(newProduct);
   });
 
   afterEach(function () {

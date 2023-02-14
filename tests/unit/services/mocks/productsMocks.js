@@ -18,10 +18,16 @@ const singleProduct = {
   name: 'Martelo de Thor'
 };
 
+const newProduct = {
+  id: 4,
+  name: 'product X'
+}
+
 const idError = { type: 404, message: 'Product not found' };
 
 module.exports = {
   allProducts,
   idError,
   singleProduct,
+  newProduct,
 }
