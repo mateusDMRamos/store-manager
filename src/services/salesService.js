@@ -10,6 +10,20 @@ const setNewSales = async (products) => {
   return { id, itemsSold };
 };
 
+const getAllSales = async () => {
+  const sales = await salesModel.findAllSales();
+  return { type: null, message: sales };
+};
+
+const getSaleById = async (saleId) => {
+  const product = await salesModel.findSaleById(saleId);
+  console.log(product);
+  if (product.length) return { type: null, message: product };
+  return { type: 404, message: 'Sale not found' };
+};
+
 module.exports = {
   setNewSales,
+  getAllSales,
+  getSaleById,
 };
